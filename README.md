@@ -5,4 +5,5 @@ This is a Django-based web application providing CRUD operations for employees a
 Features
 Employee Management: Create, update, delete, and view employees. Employees can be assigned to departments. Employee descriptions are validated to block forbidden words.
 Department Management: Create, update, delete, and view departments.
-CRUD Operations: Perform all CRUD operations for both employees and departments from the homepage.
+CRUD Operations: All operations are available from the homepage, enabling easy management of both employees and departments.
+Responsive UI: The interface is simple and user-friendly, allowing easy navigation between employee and department management pages.
