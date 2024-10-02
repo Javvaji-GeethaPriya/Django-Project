@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Department, Employee
 from .forms import DepartmentForm, EmployeeForm
 
+# View to display the home page
 def home(request):
     return render(request, 'myapp/home.html')
 
@@ -20,6 +21,7 @@ def department_create(request):
         form = DepartmentForm()
     return render(request, 'myapp/department_form.html', {'form': form})
 
+#update  department
 def department_update(request, id):
     department = get_object_or_404(Department, id=id)
     if request.method == 'POST':
@@ -31,6 +33,7 @@ def department_update(request, id):
         form = DepartmentForm(instance=department)
     return render(request, 'myapp/department_form.html', {'form': form})
 
+#delete a dept
 def department_delete(request, id):
     department = get_object_or_404(Department, id=id)
     if request.method == 'POST':
@@ -39,10 +42,13 @@ def department_delete(request, id):
     return render(request, 'myapp/department_confirm_delete.html', {'department': department})
 
 # Employee Views
+
+#View to list all employees
 def employee_list(request):
     employees = Employee.objects.all()
     return render(request, 'myapp/employee_list.html', {'employees': employees})
 
+# create a new Employee 
 def employee_create(request):
     if request.method == 'POST':
         form = EmployeeForm(request.POST)
@@ -53,6 +59,7 @@ def employee_create(request):
         form = EmployeeForm()
     return render(request, 'myapp/employee_form.html', {'form': form})
 
+# update a new employee
 def employee_update(request, id):
     employee = get_object_or_404(Employee, id=id)
     if request.method == 'POST':
@@ -64,6 +71,7 @@ def employee_update(request, id):
         form = EmployeeForm(instance=employee)
     return render(request, 'myapp/employee_form.html', {'form': form})
 
+# delete employee
 def employee_delete(request, id):
     employee = get_object_or_404(Employee, id=id)
     if request.method == 'POST':

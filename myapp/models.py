@@ -1,12 +1,14 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
+#Department Model
 class Department(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
 
+# Employee Model
 class Employee(models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField()
@@ -16,7 +18,7 @@ class Employee(models.Model):
     description = models.TextField(null = True)  # Add this field
 
     # List of forbidden words
-    forbidden_words = ['toxic', 'badEmployee', 'Harmful']  # Example words
+    forbidden_words = ['toxic', 'badEmployee', 'Harmful']  # Example toxic words
 
     def clean(self):
         # Validation logic for description
