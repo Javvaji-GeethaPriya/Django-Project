@@ -1,16 +1,29 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
-# Create your models here.
+class Department(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
 class Employee(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
+    position = models.CharField(max_length=50,null = True)
+    salary = models.DecimalField(max_digits=10, decimal_places=2)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
+    description = models.TextField(null = True)  # Add this field
 
-    name = models.CharField(max_length = 100,unique= True)
-    description = models.TextField()
-    salary = models.DecimalField(max_digits= 10,decimal_places= 2)
+    # List of forbidden words
+    forbidden_words = ['toxic', 'badEmployee', 'Harmful']  # Example words
 
-
-    def _str(self):
+    def clean(self):
+        # Validation logic for description
+        if self.description:
+            for word in self.forbidden_words:
+                if word in self.description.lower():
+                    raise ValidationError(f"The word '{word}' is not allowed in the description.")
+                
+    def __str__(self):
         return self.name
-    
-
